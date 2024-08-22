@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dívidas de Jogos entre Amigos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .capa {
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+            object-fit: cover;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .result p {
+            margin: 5px 0;
+        }
+
+        .result .jogador {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .result .deve {
+            margin-left: 10px;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .result .deve span {
+            color: #007bff;
+        }
+
+        .result .dívida {
+            margin-left: 20px;
+            margin-bottom: 5px;
+            font-style: italic;
+            color: #555;
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            input, select, button {
+                font-size: 14px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="game.webp" alt="Capa do Jogo entre Amigos" class="capa">
+        <h1>Dívidas de Jogos entre Amigos</h1>
+        <select id="numeroJogadores" onchange="atualizarFormulario()">
+            <option value="2" selected>2 Jogadores</option>
+            <option value="3">3 Jogadores</option>
+            <option value="4">4 Jogadores</option>
+            <option value="5">5 Jogadores</option>
+            <option value="6">6 Jogadores</option>
+            <option value="7">7 Jogadores</option>
+            <option value="8">8 Jogadores</option>
+        </select>
+        <input type="text" id="valorAposta" placeholder="Valor apostado no jogo (ex: R$ 1,00)" oninput="formatarMoeda(this)">
+        <div id="jogadoresForm">
+            <!-- Campos de jogadores serão inseridos aqui dinamicamente -->
+        </div>
+        <button onclick="calcularDividas()">Calcular Dívidas</button>
+        <div class="result" id="resultado"></div>
+    </div>
+
+    <script>
+        function formatarMoeda(elemento) {
+            let valor = elemento.value.replace(/\D/g, '');
+            valor = (parseInt(valor, 10) / 100).toFixed(2).replace('.', ',');
+            elemento.value = `R$ ${valor}`;
+        }
+
+        function atualizarFormulario() {
+            const numeroJogadores = parseInt(document.getElementById('numeroJogadores').value, 10);
+            const jogadoresForm = document.getElementById('jogadoresForm');
+            jogadoresForm.innerHTML = '';
+
+            for (let i = 1; i <= numeroJogadores; i++) {
+                jogadoresForm.innerHTML += `
+                    <input type="text" id="nome${i}" placeholder="Nome do participante ${i}">
+                    <input type="number" id="vitorias${i}" placeholder="Vitórias do participante ${i}">
+                `;
+            }
+        }
+
+        function calcularDividas() {
+            const valorApostaStr = document.getElementById('valorAposta').value.replace(/\D/g, '');
+            const valorAposta = parseFloat(valorApostaStr) / 100;
+            const numeroJogadores = parseInt(document.getElementById('numeroJogadores').value, 10);
+            const participantes = [];
+            
+            for (let i = 1; i <= numeroJogadores; i++) {
+                participantes.push({
+                    nome: document.getElementById(`nome${i}`).value,
+                    vitorias: parseInt(document.getElementById(`vitorias${i}`).value, 10) || 0
+                });
+            }
+
+            let resultadoHTML = '';
+            participantes.forEach((p1, index1) => {
+                resultadoHTML += `
+                    <div class="jogador">${p1.nome} deve:</div>
+                `;
+                participantes.forEach((p2, index2) => {
+                    if (index1 !== index2) {
+                        const divida = Math.max(0, (p2.vitorias - p1.vitorias) * valorAposta);
+                        resultadoHTML += `
+                            <div class="deve"><span>Para ${p2.nome}:</span> <div class="dívida">${divida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div></div>
+                        `;
+                    }
+                });
+            });
+
+            document.getElementById('resultado').innerHTML = resultadoHTML;
+        }
+
+        // Inicializar o formulário com 2 jogadores
+        atualizarFormulario();
+    </script>
+</body>
+</html>
