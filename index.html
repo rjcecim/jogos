@@ -4,116 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dívidas de Jogos entre Amigos</title>
+    <!-- Importando fontes do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
+        /* Variáveis de Cores */
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #50e3c2;
+            --background-color: #f4f7fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --error-color: #e74c3c;
+        }
+
+        /* Reset de CSS */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilização do Body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
+        /* Container Principal */
         .container {
             width: 100%;
             max-width: 500px;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            margin: 20px;
+            background-color: var(--card-color);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px var(--shadow-color);
+        }
+
+        /* Imagem de Capa */
         .capa {
             width: 100%;
             height: auto;
             border-radius: 10px 10px 0 0;
             object-fit: cover;
+            margin-bottom: 20px;
         }
 
+        /* Título */
         h1 {
             text-align: center;
-            color: #007bff;
-            margin: 20px 0;
-            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 26px;
+            font-weight: 700;
         }
 
+        /* Campos de Formulário */
         input, select, button {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
             font-size: 16px;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
         }
 
         input:focus, select:focus {
-            border-color: #007bff;
+            border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+            box-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
         }
 
+        /* Botão */
         button {
-            background-color: #007bff;
-            color: white;
+            background-color: var(--primary-color);
+            color: #fff;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
         }
 
+        /* Resultado */
         .result {
-            background-color: #e9ecef;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
             font-size: 16px;
         }
 
-        .result p {
-            margin: 5px 0;
-        }
-
         .result .jogador {
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            font-weight: bold;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-weight: 500;
             font-size: 18px;
         }
 
         .result .deve {
-            margin-left: 10px;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
         }
 
         .result .deve span {
-            color: #007bff;
+            color: var(--primary-color);
+            margin-right: 6px;
         }
 
         .result .dívida {
             margin-left: 20px;
-            margin-bottom: 5px;
             font-style: italic;
             color: #555;
         }
 
+        /* Responsividade */
         @media (max-width: 576px) {
             .container {
-                margin: 10px;
-                padding: 15px;
+                padding: 20px;
             }
 
             h1 {
@@ -122,10 +154,15 @@
 
             input, select, button {
                 font-size: 14px;
+                padding: 12px 14px;
             }
 
-            p {
+            .result {
                 font-size: 14px;
+            }
+
+            .result .jogador {
+                font-size: 16px;
             }
         }
     </style>
@@ -165,8 +202,8 @@
 
             for (let i = 1; i <= numeroJogadores; i++) {
                 jogadoresForm.innerHTML += `
-                    <input type="text" id="nome${i}" placeholder="Nome do participante ${i}">
-                    <input type="number" id="vitorias${i}" placeholder="Vitórias do participante ${i}">
+                    <input type="text" id="nome${i}" placeholder="Nome do participante ${i}" required>
+                    <input type="number" id="vitorias${i}" placeholder="Vitórias do participante ${i}" min="0" required>
                 `;
             }
         }
@@ -177,10 +214,24 @@
             const numeroJogadores = parseInt(document.getElementById('numeroJogadores').value, 10);
             const participantes = [];
             
+            // Validação de entradas
             for (let i = 1; i <= numeroJogadores; i++) {
+                const nome = document.getElementById(`nome${i}`).value.trim();
+                const vitorias = parseInt(document.getElementById(`vitorias${i}`).value, 10);
+                
+                if (nome === '') {
+                    alert(`Por favor, preencha o nome do participante ${i}.`);
+                    return;
+                }
+
+                if (isNaN(vitorias) || vitorias < 0) {
+                    alert(`Por favor, insira um número válido de vitórias para o participante ${i}.`);
+                    return;
+                }
+
                 participantes.push({
-                    nome: document.getElementById(`nome${i}`).value,
-                    vitorias: parseInt(document.getElementById(`vitorias${i}`).value, 10) || 0
+                    nome: nome,
+                    vitorias: vitorias
                 });
             }
 
@@ -192,12 +243,20 @@
                 participantes.forEach((p2, index2) => {
                     if (index1 !== index2) {
                         const divida = Math.max(0, (p2.vitorias - p1.vitorias) * valorAposta);
-                        resultadoHTML += `
-                            <div class="deve"><span>Para ${p2.nome}:</span> <div class="dívida">${divida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div></div>
-                        `;
+                        if (divida > 0) {
+                            resultadoHTML += `
+                                <div class="deve"><span>Para ${p2.nome}:</span> <div class="dívida">${divida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div></div>
+                            `;
+                        }
                     }
                 });
+                resultadoHTML += `<hr>`;
             });
+
+            // Se não houver dívidas, exibir mensagem
+            if (resultadoHTML.trim() === '') {
+                resultadoHTML = `<p>Não há dívidas a serem calculadas.</p>`;
+            }
 
             document.getElementById('resultado').innerHTML = resultadoHTML;
         }
