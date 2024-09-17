@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Definição do tipo de documento como HTML5 -->
     <meta charset="UTF-8">
+    <!-- Título da página que aparece na aba do navegador -->
     <title>Dívidas de Jogos entre Amigos</title>
+    <!-- Configura a página para ter um layout responsivo e adaptável em diferentes dispositivos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Pré-conexão com o Google Fonts para melhorar o carregamento das fontes -->
@@ -13,219 +16,223 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
     
     <style>
-        /* Variáveis CSS que definem as cores, fontes e outros elementos reutilizáveis */
+        /* Definição de variáveis CSS que serão reutilizadas ao longo do estilo */
         :root {
             --primary-color: #007bff; /* Cor primária */
             --secondary-color: #6c757d; /* Cor secundária */
-            --background-color: #e9ecef; /* Cor de fundo geral da página */
-            --container-bg: #fff; /* Cor de fundo do container principal */
+            --background-color: #e9ecef; /* Cor de fundo da página */
+            --container-bg: #fff; /* Cor de fundo do container */
             --section-bg: #f8f9fa; /* Cor de fundo das seções */
-            --input-border: #ced4da; /* Cor da borda dos inputs */
-            --shadow-color: rgba(0, 0, 0, 0.1); /* Cor da sombra para elementos */
-            --transition-speed: 0.3s; /* Velocidade de transição para animações */
-            --font-primary: 'Roboto', sans-serif; /* Fonte principal (para textos) */
-            --font-secondary: 'Montserrat', sans-serif; /* Fonte secundária (para títulos) */
-            --gradient-start: #007bff; /* Cor inicial do gradiente aplicado no título */
-            --gradient-end: #6610f2; /* Cor final do gradiente aplicado no título */
+            --input-border: #ced4da; /* Cor da borda dos campos de input */
+            --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra leve para elementos */
+            --transition-speed: 0.3s; /* Velocidade das animações de transição */
+            --font-primary: 'Roboto', sans-serif; /* Fonte padrão para textos */
+            --font-secondary: 'Montserrat', sans-serif; /* Fonte para títulos */
+            --gradient-start: #007bff; /* Cor inicial do gradiente */
+            --gradient-end: #6610f2; /* Cor final do gradiente */
         }
 
-        /* Reset básico para remover margens e preenchimentos padrão */
+        /* Remover margens e preenchimentos padrão de todos os elementos */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        /* Estilo geral do corpo da página */
+        /* Estilização do corpo da página */
         body {
-            font-family: var(--font-primary); /* Fonte definida como Roboto */
-            background-color: var(--background-color); /* Cor de fundo */
-            display: flex;
-            justify-content: center; /* Centraliza o conteúdo horizontalmente */
-            align-items: center; /* Centraliza o conteúdo verticalmente */
-            min-height: 100vh; /* Altura mínima de 100% da janela */
+            font-family: var(--font-primary); /* Define a fonte principal */
+            background-color: var(--background-color); /* Cor de fundo da página */
+            display: flex; /* Alinha o conteúdo usando Flexbox */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            min-height: 100vh; /* Define a altura mínima da página como a altura da janela */
             padding: 20px; /* Espaçamento interno */
             animation: fadeIn 1s ease-in-out; /* Animação de fade-in ao carregar a página */
         }
 
-        /* Estilos do container principal que envolve todo o conteúdo */
+        /* Estilos do container principal que envolve o conteúdo da página */
         .container {
             width: 100%;
-            max-width: 500px; /* Largura máxima de 500px */
-            background-color: var(--container-bg); /* Fundo branco */
+            max-width: 500px; /* Largura máxima para o container */
+            background-color: var(--container-bg); /* Cor de fundo branca */
             padding: 30px; /* Espaçamento interno */
             border-radius: 15px; /* Bordas arredondadas */
-            box-shadow: 0 8px 20px var(--shadow-color); /* Sombra */
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* Transição suave em hover */
+            box-shadow: 0 8px 20px var(--shadow-color); /* Sombra leve */
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* Animação suave no hover */
         }
 
-        /* Efeito ao passar o mouse sobre o container */
+        /* Efeito de hover no container */
         .container:hover {
-            transform: translateY(-5px); /* Eleva o container levemente */
-            box-shadow: 0 12px 25px var(--shadow-color); /* Aumenta a sombra */
+            transform: translateY(-5px); /* Leve deslocamento para cima */
+            box-shadow: 0 12px 25px var(--shadow-color); /* Sombra mais intensa */
         }
 
-        /* Estilo da imagem de capa */
+        /* Estilização da imagem de capa */
         .capa {
             width: 100%;
             height: auto;
-            border-radius: 15px 15px 0 0; /* Bordas arredondadas no topo */
-            object-fit: cover; /* Ajusta a imagem para cobrir o espaço disponível */
+            border-radius: 15px 15px 0 0; /* Bordas arredondadas no topo da imagem */
+            object-fit: cover; /* Ajusta a imagem para preencher o container */
             transition: transform var(--transition-speed); /* Transição suave ao redimensionar */
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* Espaçamento abaixo da imagem */
         }
 
-        /* Efeito ao passar o mouse sobre a imagem de capa */
+        /* Efeito de hover na imagem de capa */
         .capa:hover {
-            transform: scale(1.05); /* Leve ampliação da imagem */
+            transform: scale(1.05); /* Leve aumento no tamanho da imagem */
         }
 
-        /* Estilo do título (h1) */
+        /* Estilização do título principal da página */
         h1 {
             font-family: var(--font-secondary); /* Fonte Montserrat */
-            font-size: 2rem;
-            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); /* Gradiente aplicado no texto */
+            font-size: 2rem; /* Tamanho do texto */
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); /* Gradiente aplicado ao texto */
             -webkit-background-clip: text; /* Clipa o gradiente ao texto no Webkit */
-            -webkit-text-fill-color: transparent; /* Deixa a cor de preenchimento transparente */
+            -webkit-text-fill-color: transparent; /* Preenche o texto como transparente */
             background-clip: text; /* Clipa o gradiente ao texto */
-            color: transparent; /* O texto é transparente para mostrar o gradiente */
-            text-align: center; /* Centraliza o texto */
-            margin: 25px 0; /* Espaçamento vertical */
+            color: transparent; /* Define o texto como transparente */
+            text-align: center; /* Centraliza o título */
+            margin: 25px 0; /* Margem vertical ao redor do título */
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve no texto */
-            transition: background 0.5s ease; /* Transição suave no gradiente */
+            transition: background 0.5s ease; /* Transição suave do gradiente */
         }
 
-        /* Campos de Formulário */
+        /* Estilos dos campos de formulário */
         input, select, button {
-            width: 100%;
-            padding: 14px 16px;
-            margin-bottom: 18px;
-            border-radius: 8px;
-            border: 1px solid var(--input-border);
-            font-size: 1rem;
-            transition: border var(--transition-speed), box-shadow var(--transition-speed);
-            font-family: var(--font-primary);
+            width: 100%; /* Preenche 100% da largura disponível */
+            padding: 14px 16px; /* Espaçamento interno dos campos */
+            margin-bottom: 18px; /* Margem inferior entre os campos */
+            border-radius: 8px; /* Bordas arredondadas */
+            border: 1px solid var(--input-border); /* Cor da borda dos inputs */
+            font-size: 1rem; /* Tamanho do texto */
+            transition: border var(--transition-speed), box-shadow var(--transition-speed); /* Transições suaves */
+            font-family: var(--font-primary); /* Fonte Roboto */
         }
 
-        /* Estilo dos campos de entrada quando estão em foco */
+        /* Estilo dos campos de input em foco */
         input:focus, select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-            outline: none;
+            border-color: var(--primary-color); /* Cor da borda ao focar */
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2); /* Sombra ao focar */
+            outline: none; /* Remove o contorno padrão */
         }
 
         /* Estilo do botão */
         button {
-            background-color: var(--primary-color);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-            font-family: var(--font-secondary);
+            background-color: var(--primary-color); /* Cor de fundo do botão */
+            color: #fff; /* Cor do texto no botão */
+            border: none; /* Remove a borda */
+            cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
+            font-weight: 500; /* Define o peso da fonte */
+            transition: background-color var(--transition-speed), transform var(--transition-speed); /* Transições suaves */
+            font-family: var(--font-secondary); /* Fonte Montserrat */
         }
 
+        /* Efeito de hover no botão */
         button:hover {
-            background-color: #6610f2; /* Alterando para a cor final do gradiente */
-            transform: translateY(-2px);
+            background-color: #6610f2; /* Alteração da cor de fundo no hover */
+            transform: translateY(-2px); /* Leve elevação do botão no hover */
         }
 
-        /* Resultado */
+        /* Estilos da seção de resultados */
         .result {
-            background-color: var(--section-bg);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 25px;
-            font-size: 1rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+            background-color: var(--section-bg); /* Cor de fundo da seção de resultados */
+            padding: 20px; /* Espaçamento interno */
+            border-radius: 10px; /* Bordas arredondadas */
+            margin-top: 25px; /* Espaçamento superior */
+            font-size: 1rem; /* Tamanho do texto */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra leve */
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed); /* Transições suaves */
         }
 
+        /* Efeito de hover na seção de resultados */
         .result:hover {
-            background-color: #e2e6ea;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background-color: #e2e6ea; /* Cor de fundo ao passar o mouse */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Aumenta a sombra no hover */
         }
 
+        /* Estilo do nome dos jogadores na seção de resultados */
         .result .jogador {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            font-weight: 500;
-            font-size: 1.125rem;
+            background-color: var(--primary-color); /* Fundo azul para o nome do jogador */
+            color: #fff; /* Cor do texto branco */
+            padding: 12px; /* Espaçamento interno */
+            border-radius: 6px; /* Bordas arredondadas */
+            margin-bottom: 12px; /* Espaçamento inferior */
+            font-weight: 500; /* Peso da fonte */
+            font-size: 1.125rem; /* Tamanho do texto */
         }
 
+        /* Estilo das dívidas entre jogadores */
         .result .deve {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-color);
+            display: flex; /* Usando Flexbox para alinhamento */
+            align-items: center; /* Centraliza verticalmente */
+            margin-bottom: 8px; /* Espaçamento inferior */
+            font-weight: 500; /* Peso da fonte */
+            color: var(--text-color); /* Cor do texto */
         }
 
         .result .deve span {
-            color: var(--primary-color);
-            margin-right: 6px;
+            color: var(--primary-color); /* Cor azul para o nome do devedor */
+            margin-right: 6px; /* Espaçamento à direita */
         }
 
         .result .dívida {
-            margin-left: 20px;
-            font-style: italic;
-            color: #555;
+            margin-left: 20px; /* Espaçamento à esquerda */
+            font-style: italic; /* Texto em itálico */
+            color: #555; /* Cor do texto cinza escuro */
         }
 
-        /* Animação de fade-in usada na página */
+        /* Animação de fade-in */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; } /* Inicia invisível */
+            to { opacity: 1; } /* Torna-se visível */
         }
 
-        /* Responsividade para telas menores */
+        /* Responsividade para dispositivos menores */
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.8rem; /* Reduz o tamanho do título */
             }
 
             .container {
-                padding: 25px;
+                padding: 25px; /* Reduz o espaçamento do container */
             }
 
             input, select, button {
-                font-size: 0.95rem;
-                padding: 12px 14px;
+                font-size: 0.95rem; /* Reduz o tamanho da fonte dos campos */
+                padding: 12px 14px; /* Reduz o espaçamento interno */
             }
 
             .result {
-                font-size: 0.95rem;
+                font-size: 0.95rem; /* Reduz o tamanho da fonte dos resultados */
             }
 
             .result .jogador {
-                font-size: 1rem;
+                font-size: 1rem; /* Reduz o tamanho do texto dos jogadores */
             }
         }
 
         /* Responsividade para telas muito pequenas */
         @media (max-width: 480px) {
             .container {
-                padding: 20px;
+                padding: 20px; /* Reduz o espaçamento do container */
             }
 
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.5rem; /* Reduz o tamanho do título */
             }
 
             input, select, button {
-                font-size: 0.9rem;
-                padding: 10px 12px;
+                font-size: 0.9rem; /* Reduz o tamanho da fonte dos campos */
+                padding: 10px 12px; /* Reduz o espaçamento interno */
             }
 
             .result {
-                font-size: 0.9rem;
+                font-size: 0.9rem; /* Reduz o tamanho da fonte dos resultados */
             }
 
             .result .jogador {
-                font-size: 0.95rem;
+                font-size: 0.95rem; /* Reduz o tamanho do texto dos jogadores */
             }
         }
     </style>
@@ -283,6 +290,7 @@
             const jogadoresForm = document.getElementById('jogadoresForm');
             jogadoresForm.innerHTML = '';
 
+            // Loop para adicionar os campos de nome e vitórias dos jogadores dinamicamente
             for (let i = 1; i <= numeroJogadores; i++) {
                 jogadoresForm.innerHTML += `
                     <div class="section">
@@ -297,12 +305,13 @@
 
         /* Função para calcular dívidas entre jogadores */
         function calcularDividas() {
+            // Captura o valor da aposta e converte para número
             const valorApostaStr = document.getElementById('valorAposta').value.replace(/\D/g, '');
             const valorAposta = parseFloat(valorApostaStr) / 100;
             const numeroJogadores = parseInt(document.getElementById('numeroJogadores').value, 10);
             const participantes = [];
             
-            // Validação de entradas
+            // Validação das entradas e criação do array de participantes
             for (let i = 1; i <= numeroJogadores; i++) {
                 const nome = document.getElementById(`nome${i}`).value.trim();
                 const vitorias = parseInt(document.getElementById(`vitorias${i}`).value, 10);
@@ -323,6 +332,7 @@
                 });
             }
 
+            // Monta o resultado das dívidas
             let resultadoHTML = '';
             participantes.forEach((p1, index1) => {
                 let dividasExistentes = false;
@@ -346,7 +356,7 @@
                 }
             });
 
-            // Se não houver dívidas, exibir mensagem
+            // Exibe uma mensagem se não houver dívidas
             if (resultadoHTML.trim() === '') {
                 resultadoHTML = `<p>Não há dívidas a serem calculadas.</p>`;
             }
@@ -354,7 +364,7 @@
             document.getElementById('resultado').innerHTML = resultadoHTML;
         }
 
-        // Inicializar o formulário com 2 jogadores
+        // Inicializa o formulário com 2 jogadores
         atualizarFormulario();
     </script>
 </body>
