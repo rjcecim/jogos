@@ -1,75 +1,98 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dívidas de Jogos entre Amigos</title>
-    <!-- Importando fontes do Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Pré-conexão com o Google Fonts para melhorar o carregamento das fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Importação das fontes Montserrat para títulos e Roboto para o corpo do texto -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    
     <style>
-        /* Variáveis de Cores */
+        /* Variáveis CSS que definem as cores, fontes e outros elementos reutilizáveis */
         :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #50e3c2;
-            --background-color: #f4f7fa;
-            --card-color: #ffffff;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --error-color: #e74c3c;
+            --primary-color: #007bff; /* Cor primária */
+            --secondary-color: #6c757d; /* Cor secundária */
+            --background-color: #e9ecef; /* Cor de fundo geral da página */
+            --container-bg: #fff; /* Cor de fundo do container principal */
+            --section-bg: #f8f9fa; /* Cor de fundo das seções */
+            --input-border: #ced4da; /* Cor da borda dos inputs */
+            --shadow-color: rgba(0, 0, 0, 0.1); /* Cor da sombra para elementos */
+            --transition-speed: 0.3s; /* Velocidade de transição para animações */
+            --font-primary: 'Roboto', sans-serif; /* Fonte principal (para textos) */
+            --font-secondary: 'Montserrat', sans-serif; /* Fonte secundária (para títulos) */
+            --gradient-start: #007bff; /* Cor inicial do gradiente aplicado no título */
+            --gradient-end: #6610f2; /* Cor final do gradiente aplicado no título */
         }
 
-        /* Reset de CSS */
+        /* Reset básico para remover margens e preenchimentos padrão */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        /* Estilização do Body */
+        /* Estilo geral do corpo da página */
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: var(--font-primary); /* Fonte definida como Roboto */
+            background-color: var(--background-color); /* Cor de fundo */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            justify-content: center; /* Centraliza o conteúdo horizontalmente */
+            align-items: center; /* Centraliza o conteúdo verticalmente */
+            min-height: 100vh; /* Altura mínima de 100% da janela */
+            padding: 20px; /* Espaçamento interno */
+            animation: fadeIn 1s ease-in-out; /* Animação de fade-in ao carregar a página */
         }
 
-        /* Container Principal */
+        /* Estilos do container principal que envolve todo o conteúdo */
         .container {
             width: 100%;
-            max-width: 500px;
-            background-color: var(--card-color);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px var(--shadow-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 500px; /* Largura máxima de 500px */
+            background-color: var(--container-bg); /* Fundo branco */
+            padding: 30px; /* Espaçamento interno */
+            border-radius: 15px; /* Bordas arredondadas */
+            box-shadow: 0 8px 20px var(--shadow-color); /* Sombra */
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed); /* Transição suave em hover */
         }
 
+        /* Efeito ao passar o mouse sobre o container */
         .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px var(--shadow-color);
+            transform: translateY(-5px); /* Eleva o container levemente */
+            box-shadow: 0 12px 25px var(--shadow-color); /* Aumenta a sombra */
         }
 
-        /* Imagem de Capa */
+        /* Estilo da imagem de capa */
         .capa {
             width: 100%;
             height: auto;
-            border-radius: 10px 10px 0 0;
-            object-fit: cover;
+            border-radius: 15px 15px 0 0; /* Bordas arredondadas no topo */
+            object-fit: cover; /* Ajusta a imagem para cobrir o espaço disponível */
+            transition: transform var(--transition-speed); /* Transição suave ao redimensionar */
             margin-bottom: 20px;
         }
 
-        /* Título */
+        /* Efeito ao passar o mouse sobre a imagem de capa */
+        .capa:hover {
+            transform: scale(1.05); /* Leve ampliação da imagem */
+        }
+
+        /* Estilo do título (h1) */
         h1 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            font-size: 26px;
-            font-weight: 700;
+            font-family: var(--font-secondary); /* Fonte Montserrat */
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); /* Gradiente aplicado no texto */
+            -webkit-background-clip: text; /* Clipa o gradiente ao texto no Webkit */
+            -webkit-text-fill-color: transparent; /* Deixa a cor de preenchimento transparente */
+            background-clip: text; /* Clipa o gradiente ao texto */
+            color: transparent; /* O texto é transparente para mostrar o gradiente */
+            text-align: center; /* Centraliza o texto */
+            margin: 25px 0; /* Espaçamento vertical */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve no texto */
+            transition: background 0.5s ease; /* Transição suave no gradiente */
         }
 
         /* Campos de Formulário */
@@ -78,39 +101,49 @@
             padding: 14px 16px;
             margin-bottom: 18px;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
-            font-size: 16px;
-            transition: border 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--input-border);
+            font-size: 1rem;
+            transition: border var(--transition-speed), box-shadow var(--transition-speed);
+            font-family: var(--font-primary);
         }
 
+        /* Estilo dos campos de entrada quando estão em foco */
         input:focus, select:focus {
             border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
             outline: none;
-            box-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
         }
 
-        /* Botão */
+        /* Estilo do botão */
         button {
             background-color: var(--primary-color);
             color: #fff;
             border: none;
             cursor: pointer;
             font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            font-family: var(--font-secondary);
         }
 
         button:hover {
-            background-color: var(--secondary-color);
+            background-color: #6610f2; /* Alterando para a cor final do gradiente */
             transform: translateY(-2px);
         }
 
         /* Resultado */
         .result {
-            background-color: #f0f4f8;
+            background-color: var(--section-bg);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-top: 25px;
-            font-size: 16px;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .result:hover {
+            background-color: #e2e6ea;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
 
         .result .jogador {
@@ -120,7 +153,7 @@
             border-radius: 6px;
             margin-bottom: 12px;
             font-weight: 500;
-            font-size: 18px;
+            font-size: 1.125rem;
         }
 
         .result .deve {
@@ -142,35 +175,70 @@
             color: #555;
         }
 
-        /* Responsividade */
-        @media (max-width: 576px) {
+        /* Animação de fade-in usada na página */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            input, select, button {
+                font-size: 0.95rem;
+                padding: 12px 14px;
+            }
+
+            .result {
+                font-size: 0.95rem;
+            }
+
+            .result .jogador {
+                font-size: 1rem;
+            }
+        }
+
+        /* Responsividade para telas muito pequenas */
+        @media (max-width: 480px) {
             .container {
                 padding: 20px;
             }
 
             h1 {
-                font-size: 22px;
+                font-size: 1.5rem;
             }
 
             input, select, button {
-                font-size: 14px;
-                padding: 12px 14px;
+                font-size: 0.9rem;
+                padding: 10px 12px;
             }
 
             .result {
-                font-size: 14px;
+                font-size: 0.9rem;
             }
 
             .result .jogador {
-                font-size: 16px;
+                font-size: 0.95rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Imagem de capa do jogo -->
         <img src="game.webp" alt="Capa do Jogo entre Amigos" class="capa">
+        
+        <!-- Título do aplicativo -->
         <h1>Dívidas de Jogos entre Amigos</h1>
+        
+        <!-- Seleção do número de jogadores -->
         <select id="numeroJogadores" onchange="atualizarFormulario()">
             <option value="2" selected>2 Jogadores</option>
             <option value="3">3 Jogadores</option>
@@ -180,21 +248,36 @@
             <option value="7">7 Jogadores</option>
             <option value="8">8 Jogadores</option>
         </select>
+        
+        <!-- Campo para valor apostado -->
         <input type="text" id="valorAposta" placeholder="Valor apostado no jogo (ex: R$ 1,00)" oninput="formatarMoeda(this)">
+        
+        <!-- Formulário dinâmico para jogadores -->
         <div id="jogadoresForm">
             <!-- Campos de jogadores serão inseridos aqui dinamicamente -->
         </div>
+        
+        <!-- Botão para calcular dívidas -->
         <button onclick="calcularDividas()">Calcular Dívidas</button>
+        
+        <!-- Seção de resultados -->
         <div class="result" id="resultado"></div>
     </div>
 
     <script>
+        /* Função para formatar um valor como moeda (R$) */
+        function formatarValor(valor) {
+            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        /* Função para formatar o campo de entrada como valor monetário */
         function formatarMoeda(elemento) {
             let valor = elemento.value.replace(/\D/g, '');
             valor = (parseInt(valor, 10) / 100).toFixed(2).replace('.', ',');
             elemento.value = `R$ ${valor}`;
         }
 
+        /* Função para atualizar o formulário com base no número de jogadores */
         function atualizarFormulario() {
             const numeroJogadores = parseInt(document.getElementById('numeroJogadores').value, 10);
             const jogadoresForm = document.getElementById('jogadoresForm');
@@ -202,12 +285,17 @@
 
             for (let i = 1; i <= numeroJogadores; i++) {
                 jogadoresForm.innerHTML += `
-                    <input type="text" id="nome${i}" placeholder="Nome do participante ${i}" required>
-                    <input type="number" id="vitorias${i}" placeholder="Vitórias do participante ${i}" min="0" required>
+                    <div class="section">
+                        <label for="nome${i}">Nome do Participante ${i}:</label>
+                        <input type="text" id="nome${i}" placeholder="Nome do participante ${i}" required>
+                        <label for="vitorias${i}">Vitórias do Participante ${i}:</label>
+                        <input type="number" id="vitorias${i}" placeholder="Vitórias do participante ${i}" min="0" required>
+                    </div>
                 `;
             }
         }
 
+        /* Função para calcular dívidas entre jogadores */
         function calcularDividas() {
             const valorApostaStr = document.getElementById('valorAposta').value.replace(/\D/g, '');
             const valorAposta = parseFloat(valorApostaStr) / 100;
@@ -237,20 +325,25 @@
 
             let resultadoHTML = '';
             participantes.forEach((p1, index1) => {
-                resultadoHTML += `
+                let dividasExistentes = false;
+                let dividaHTML = `
                     <div class="jogador">${p1.nome} deve:</div>
                 `;
                 participantes.forEach((p2, index2) => {
                     if (index1 !== index2) {
                         const divida = Math.max(0, (p2.vitorias - p1.vitorias) * valorAposta);
                         if (divida > 0) {
-                            resultadoHTML += `
-                                <div class="deve"><span>Para ${p2.nome}:</span> <div class="dívida">${divida.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div></div>
+                            dividasExistentes = true;
+                            dividaHTML += `
+                                <div class="deve"><span>Para ${p2.nome}:</span> <div class="dívida">${formatarValor(divida)}</div></div>
                             `;
                         }
                     }
                 });
-                resultadoHTML += `<hr>`;
+                if (dividasExistentes) {
+                    dividaHTML += `<hr>`;
+                    resultadoHTML += dividaHTML;
+                }
             });
 
             // Se não houver dívidas, exibir mensagem
